@@ -22,6 +22,16 @@ h1{
     transition: 0.3s;
 }
 
+@keyframes hover-effect{
+    0%{opacity: 100%;}
+    100%{opacity: 30%;}
+   /* 100%{opacity: 100%;}*/
+}
+
 .hover{
     background-color: black;
+    animation-name: hover-effect;
+    animation-duration: 0.4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
