@@ -9,7 +9,7 @@ h1{
     /*width: 900px;*/
     border : 3px solid rgb(126, 126, 126);
     
-    float : right;
+    margin : 0 auto;
 }
 
 .box{
@@ -19,4 +19,9 @@ h1{
     margin: 0;
     background-color: rgb(226, 223, 223);
     border: 1px solid grey; 
+    transition: 0.3s;
+}
+
+.hover{
+    background-color: black;
 }
