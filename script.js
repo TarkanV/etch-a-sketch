@@ -13,7 +13,7 @@ const rainbow = document.querySelector(".rainbow");
 let switchRainbow = false;
 const gradient = document.querySelector(".gradient");
 let switchGradient = false;
-let gradientStep = 1;
+let gradientStep = 10;
 
 let boxs = null;
 //let rowSize = 8;
@@ -105,6 +105,7 @@ function enableRainbow(){
         if(switchGradient) {
             switchGradient = false;
             gradient.classList.toggle("active");
+            calculateRainbow();
         }
         else if(!switchRainbow) {color.disabled = false; colorValue = savedColor;}
         else {color.disabled = true; savedColor = colorValue; calculateRainbow(); };
@@ -137,7 +138,7 @@ function enableGradient(){
         else {color.disabled = true; savedColor = colorValue; calculateGradient(); 
         };
     });
-    gridNode.addEventListener("mouseup", () => {gradientStep = 1;
+    gridNode.addEventListener("mouseup", () => {gradientStep = 10;
         console.log("debut gradient");
     });
     gridNode.addEventListener("mousedown", () =>{
@@ -150,8 +151,8 @@ function enableGradient(){
         }
         else{
 
-            gradientStep = 2;
-            if(switchGradient) colorValue = "black";
+            gradientStep = 9;
+            if(switchGradient) colorValue = "white";
         }
         
 
@@ -161,9 +162,9 @@ function enableGradient(){
 }
 function calculateGradient(){
     if(switchGradient){
-        if(gradientStep <= 10){
+        if(gradientStep >= 1){
             colorValue = (`hsl(0deg, 0%, ${10 * gradientStep}%)`);
-            ++gradientStep;
+            --gradientStep;
         }
     }
 }
