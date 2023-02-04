@@ -1,5 +1,12 @@
+*{
+    user-select: none;
+}
+
 h1{
     text-align: center;
+}
+.content{
+    //display : flex;
 }
 .grid-container{
     display: grid;
@@ -20,6 +27,7 @@ h1{
     background-color: rgb(226, 223, 223);
     border: 1px solid grey; 
     transition: 0.3s;
+    user-select: none;
 }
 
 @keyframes hover-effect{
