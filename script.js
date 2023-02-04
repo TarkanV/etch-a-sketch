@@ -9,10 +9,19 @@ const resize = document.querySelector(".resize");
 const slider = document.querySelector(".size-slider");
 const sliderValue = document.querySelector(".slider-value");
 
+const rainbow = document.querySelector(".rainbow");
+let switchRainbow = false;
+const gradient = document.querySelector(".gradient");
+let switchGradient = false;
+let gradientStep = 1;
+
 let boxs = null;
 //let rowSize = 8;
 let colSize = 16;
 let colorValue = "black";
+let savedColor = "black";
+
+
 reset.addEventListener("click", () => initializeGrid(colSize));
 
 function initializeGrid(colSize){
@@ -72,6 +81,7 @@ function addColoringEvents(){
 function enableGridResizing(resize, slider){
     resize.addEventListener("click", () => {
         
+        resize.classList.toggle("active");
         let isDisabled = slider.disabled;
         console.log(isDisabled);
         slider.disabled = (!isDisabled ? true : false); 
@@ -87,12 +97,83 @@ function resizeGrid(slider){
     })
 }
 
+function enableRainbow(){
+    rainbow.addEventListener("click", () => {
+        rainbow.classList.toggle("active");
+        
+        switchRainbow = !switchRainbow ? true : false;
+        if(switchGradient) {
+            switchGradient = false;
+            gradient.classList.toggle("active");
+        }
+        else if(!switchRainbow) {color.disabled = false; colorValue = savedColor;}
+        else {color.disabled = true; savedColor = colorValue; calculateRainbow(); };
+    });
+    gridNode.addEventListener("mouseover", (e) =>{
+        if(e.buttons > 0) calculateRainbow(); 
+    });
+    gridNode.addEventListener("mousedown", () =>{
+        calculateRainbow();
+    });
+}
+function calculateRainbow(){
+    if(switchRainbow){
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random( ) * 256);
+        colorValue = `rgb(${r},${g},${b})`;
+        console.log(colorValue);
+    }
+}
+
+function enableGradient(){
+    gradient.addEventListener("click", () => {
+        gradient.classList.toggle("active");
+        
+
+        switchGradient = !switchGradient ? true : false;
+        if(switchRainbow) {switchRainbow = false; rainbow.classList.toggle("active");}
+        else if(!switchGradient) {color.disabled = false; colorValue = savedColor;}
+        else {color.disabled = true; savedColor = colorValue; calculateGradient(); 
+        };
+    });
+    gridNode.addEventListener("mouseup", () => {gradientStep = 1;
+        console.log("debut gradient");
+    });
+    gridNode.addEventListener("mousedown", () =>{
+        
+        calculateGradient();
+    });
+    gridNode.addEventListener("mouseover", (e) =>{
+        if(e.buttons > 0){
+            calculateGradient();
+        }
+        else{
+
+            gradientStep = 2;
+            if(switchGradient) colorValue = "black";
+        }
+        
+
+           
+    });
+
+}
+function calculateGradient(){
+    if(switchGradient){
+        if(gradientStep <= 10){
+            colorValue = (`hsl(0deg, 0%, ${10 * gradientStep}%)`);
+            ++gradientStep;
+        }
+    }
+}
 
 initializeGrid(colSize);
 changeColor();
 enableGridResizing(resize,slider);
 resizeGrid(slider);
-
+enableRainbow();
+enableGradient();
 
 
 
