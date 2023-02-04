@@ -1,5 +1,19 @@
 *{
     user-select: none;
+    font-family: "Oswald", sans-serif;
+}
+
+body{
+    background-image: url("img/etchback.jpg");
+    
+    background-size: 100%;
+    
+    background-color: rgb(91, 91, 175);
+    background-blend-mode:multiply;
+    
+    height: 100vh; 
+    color: lightgray;
+
 }
 
 h1{
@@ -8,6 +22,8 @@ h1{
 .content{
     display : flex;
 }
+
+/*Options*/
 .options{
     width: 400px;
     display: flex;
@@ -15,10 +31,31 @@ h1{
     align-items: center;
 }
 
+.color{
+    width : 100px;
+    height: 100px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 10px solid black;
+}
+button{
+    width: 70%;
+    padding: 10px 0;
+    margin : 5px 0; 
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    color : lightgray;
+    background-color: rgb(117, 116, 116);
+}
+[type="range"]{
+    width: 70%;
+}
+
 .grid-container{
     display: grid;
     width: 460px;
     height: 460px;
+    background-color: white;
     grid-template-columns: repeat(8, 1fr);
     /*width: 900px;*/
     border : 3px solid rgb(126, 126, 126);
@@ -38,7 +75,7 @@ h1{
 }
 
 @keyframes hover-effect{
-    0%{opacity: 100%;}
+    0%{opacity: 60%;}
     100%{opacity: 30%;}
    /* 100%{opacity: 100%;}*/
 }
@@ -51,4 +88,5 @@ h1{
     animation-duration: 0.4s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+    
 }

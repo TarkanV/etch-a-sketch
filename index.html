@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <title>Etch a Sketch</title>
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald">
 </head>
 <body>
     <h1>Etch-A-Sketch</h1>
     <div class="content">
         <div class="options">
-            <button class="reset">RESET</button>
+            <input type="color" class="color">
+            <button class="rainbow">Rainbow Mode</button>
+            <button class="gradient">Gradient Mode</button>
+            <button class="reset">Clear</button>
+            <button class="resize">Resize Grid</button>
+            <input class="size-slider" type="range" min="2" max="100" step="1" value="16" disabled> 
+            <p class="slider-value">Size: 16</p>
         </div>
         <div class="grid-container"></div>
         <div class="whitespace"></div>

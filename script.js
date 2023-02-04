@@ -3,10 +3,16 @@
 const gridNode = document.querySelector(".grid-container");
 const body = document.querySelector("body");
 const reset = document.querySelector(".reset");
+const color = document.querySelector(".color");
+
+const resize = document.querySelector(".resize");
+const slider = document.querySelector(".size-slider");
+const sliderValue = document.querySelector(".slider-value");
 
 let boxs = null;
 //let rowSize = 8;
 let colSize = 16;
+let colorValue = "black";
 reset.addEventListener("click", () => initializeGrid(colSize));
 
 function initializeGrid(colSize){
@@ -35,52 +41,57 @@ function initializeGrid(colSize){
 
 }
 
+function changeColor(){
+    color.addEventListener("change", () => {
+        colorValue = color.value;
+      
+    });
+}
 
 function addColoringEvents(){
     let isDown = null;
 
-    
-    
-    
-
-    /*
-    gridNode.addEventListener("mouseup", () => {
-        isDown = false;
-    });
-    gridNode.addEventListener("mousedown", () => { 
-        isDown = true;
-    });
-    gridNode.addEventListener("mouseleave", (e) => {
-        isDown = false;
-    });
-    */
-
-
-
     boxs.forEach(box => {     
         //Colors when left mouse button is clicked
         box.addEventListener("mousedown", () => {
-            box.style.backgroundColor = "black"; 
+            box.style.backgroundColor = colorValue; 
         });
-
         //Adds hover effect to box the cursor is on and colors it if mousedown
         box.addEventListener("mouseover", (e) => {
             box.classList.toggle("hover",true);
-            if(e.buttons > 0) box.style.backgroundColor = "black";
-        });
-       
+            if(e.buttons > 0) box.style.backgroundColor = colorValue;
+        });    
         //Remove hover effect from boxes the cursor left 
         box.addEventListener("mouseout", ()=> {
             box.classList.toggle("hover", false);
-        }); 
-
-        //Cancels hover and mousedown coloring
-     
+        });   
         
     });
 }
 
+function enableGridResizing(resize, slider){
+    resize.addEventListener("click", () => {
+        
+        let isDisabled = slider.disabled;
+        console.log(isDisabled);
+        slider.disabled = (!isDisabled ? true : false); 
+    });
+}
+function resizeGrid(slider){
+    slider.addEventListener("input", () => sliderValue.textContent = "Size : " + slider.value);
+    slider.addEventListener("change", () =>{
+        colSize = slider.value;
+        console.log(colSize);
+        
+       initializeGrid(colSize); 
+    })
+}
+
+
 initializeGrid(colSize);
+changeColor();
+enableGridResizing(resize,slider);
+resizeGrid(slider);
 
 
 
